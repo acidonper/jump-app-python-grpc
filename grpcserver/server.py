@@ -17,6 +17,10 @@ class Jump(jump_pb2_grpc.JumpServiceServicer):
         request.count = request.count + 1
         logging.info("gRPC Server: Steps count %d" % request.count)
 
+        # Control the number of jumps when it is not the first jump
+        if len(request.jumps) > 0 and request.count > 1:
+            del request.jumps[0]
+
         # Evaluate jumps to send response or perform a jump 
         if len(request.jumps) == 0 or request.jumps[0] == "":
             logging.info("gRPC Server: Send response 200")

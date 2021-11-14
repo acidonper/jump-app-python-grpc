@@ -7,7 +7,8 @@ This repository includes a microservice based on Python and gRPC that is a compo
 - Run the gRPC server
 
 ```$bash
-python grpc/server.py
+export PYTHONPATH="./grpcserver"
+python app.py
 ```
 
 - Execute the test

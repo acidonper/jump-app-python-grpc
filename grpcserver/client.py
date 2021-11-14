@@ -14,12 +14,6 @@ def jump(request):
     addr = request.jumps[0]
     logging.info(msg= "gRPC Client: Jump to %s" % addr)
 
-    # Control the number of jumps when it is not the first jump
-    if len(request.jumps) != 1:
-        del request.jumps[0]
-    else:
-        request.jumps[0] = ""
-
     with grpc.insecure_channel(addr) as channel:
         try:
             stub = jump_pb2_grpc.JumpServiceStub(channel)
